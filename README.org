@@ -1,3 +1,12 @@
 * extensible_image_archiver
 
-A *work-in-progress* application to download art from the internet.
+A *work-in-progress* library to download art from the internet.
+
+** DISCLAIMER
+
+This library is provided to you AS-IS with NO WARRANTY.
+This library is not responsible for your usage of it, any moderation actions that
+websites may or may not take against you, or anything similar.
+You are expected to responsibly use this library.
+Use this library at your own risk. Websites may or may not moderate you if you do
+not adhere to their usage policies.
