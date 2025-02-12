@@ -17,13 +17,13 @@ class TwitterSeleniumDriver(usernameToSearch: String, private val twitterUsernam
         WebDriverWait(this.seleniumDriver, Duration.ofSeconds(5))
             .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[autocomplete=username]")))
             .sendKeys(this.twitterUsername)
-        this.seleniumDriver.findElement(By.xpath("\"//button/div/span/span[.='Next']\""))
+        this.seleniumDriver.findElement(By.xpath("//button/div/span/span[text()='Next']"))
             .click()
 
         WebDriverWait(this.seleniumDriver, Duration.ofSeconds(5))
             .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[autocomplete=current-password]")))
             .sendKeys(this.twitterPassword)
-        this.seleniumDriver.findElement(By.xpath("\"//button/div/span/span[.='Log in']\""))
+        this.seleniumDriver.findElement(By.xpath("//button/div/span/span[text()='Log in']"))
             .click()
     }
 }
