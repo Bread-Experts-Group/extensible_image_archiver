@@ -18,14 +18,11 @@ class PixivSeleniumDriver(
 
     override fun run(outputDirectory: Path) {
         this.seleniumDriver.get(this.url)
-        WebDriverWait(this.seleniumDriver, Duration.ofSeconds(5))
-            .until(
-                ExpectedConditions
-                    .presenceOfElementLocated(By.className("thumbnail-link"))
+        WebDriverWait(this.seleniumDriver, Duration.ofSeconds(5)).until(
+                ExpectedConditions.presenceOfElementLocated(By.className("thumbnail-link"))
             )
 
-        val images = this.seleniumDriver
-            .findElements(By.className("thumbnail-link"))
+        val images = this.seleniumDriver.findElements(By.className("thumbnail-link"))
         this.seleniumDriver.windowHandle
 
         for (image in images) {
@@ -34,12 +31,9 @@ class PixivSeleniumDriver(
 
             this.seleniumDriver.get("https://pixiv.net$anchorHref")
 
-            val src = WebDriverWait(this.seleniumDriver, Duration.ofSeconds(5))
-                .until(
-                    ExpectedConditions
-                        .presenceOfElementLocated(By.className("work-thumb"))
-                )
-                .getDomAttribute("src")
+            val src = WebDriverWait(this.seleniumDriver, Duration.ofSeconds(5)).until(
+                    ExpectedConditions.presenceOfElementLocated(By.className("work-thumb"))
+                ).getDomAttribute("src")
 
             if (src == null) {
                 println("Skipping null src for ${this.seleniumDriver.currentUrl}")
@@ -49,8 +43,7 @@ class PixivSeleniumDriver(
             val mangaButton = this.seleniumDriver.findElements(By.xpath("//button[text()='Show all']"))
             if (mangaButton.size == 1) {
                 mangaButton[0].click()
-                WebDriverWait(this.seleniumDriver, Duration.ofSeconds(5))
-                    .until(
+                WebDriverWait(this.seleniumDriver, Duration.ofSeconds(5)).until(
                         ExpectedConditions.presenceOfElementLocated(
                             By.className("manga-pages")
                         )
@@ -58,9 +51,7 @@ class PixivSeleniumDriver(
 
                 val pages = this.seleniumDriver.findElements(By.className("manga-page"))
                 for (page in pages) {
-                    val imageSrc = page
-                        .findElement(By.xpath("./div/img"))
-                        .getDomAttribute("src")
+                    val imageSrc = page.findElement(By.xpath("./div/img")).getDomAttribute("src")
                     println(imageSrc)
                 }
             } else {
